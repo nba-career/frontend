@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import axios from "axios";
 
 import { fetchData, searchPlayers } from "../actions";
 
@@ -7,11 +8,19 @@ import Player from "./Player";
 
 class PlayerList extends React.Component {
   state = {
-    searchedPlayer: null
+    searchedPlayer: null,
+    teams: null
   };
 
   componentDidMount() {
     this.props.fetchData();
+    axios
+      .get("http://localhost:5000/api/teams")
+      .then(res => {
+        this.setState({ teams: res.data });
+      })
+      .catch(err => console.log(err));
+    console.log(this.state);
   }
 
   handleChanges = e => {
@@ -19,13 +28,13 @@ class PlayerList extends React.Component {
     this.setState({
       searchedPlayer: value
     });
-    console.log(this.state);
   };
 
   filterPlayers = e => {
     e.preventDefault();
     this.props.searchPlayers(this.state.searchedPlayer);
     e.target.reset();
+    console.log(this.state);
   };
 
   render() {
@@ -41,6 +50,17 @@ class PlayerList extends React.Component {
             placeholder="Enter player name here..."
           />
         </form>
+        <select>
+          {this.state.teams ? (
+            this.state.teams.map((team, index) => (
+              <option key={index} value={team.team}>
+                {team.team}
+              </option>
+            ))
+          ) : (
+            <option>Loading...</option>
+          )}
+        </select>
         {this.props.players.map(player => (
           <Player key={player.id} player={player} />
         ))}

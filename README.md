@@ -20,6 +20,4 @@
 
 ## Team
 
-Frontend Architects - [Daniel O'Neill](https://github.com/danpatrickoneill)
-
-UI/Landing Page - [Seth Lachman](https://github.com/stlachman)
+Frontend Architect - [Daniel O'Neill](https://github.com/danpatrickoneill)
