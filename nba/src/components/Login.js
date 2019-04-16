@@ -68,6 +68,7 @@ class Login extends React.Component {
   submitLogin = e => {
     e.preventDefault();
     this.props.login(this.state);
+    this.props.history.push("/player-list");
   };
 
   render() {
