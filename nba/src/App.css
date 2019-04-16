@@ -1,3 +1,18 @@
 .App {
   text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.playerCardContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.playerCard {
+  border: 2px solid orange;
+  padding: 5px;
+  margin-bottom: 10px;
+  min-width: 200px;
 }

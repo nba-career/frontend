@@ -4,7 +4,7 @@ import axios from "axios";
 
 import { fetchData, searchPlayers } from "../actions";
 
-import Player from "./Player";
+import PlayerCard from "./PlayerCard";
 
 class PlayerList extends React.Component {
   state = {
@@ -61,9 +61,11 @@ class PlayerList extends React.Component {
             <option>Loading...</option>
           )}
         </select>
-        {this.props.players.map(player => (
-          <Player key={player.id} player={player} />
-        ))}
+        <div className="playerCardContainer">
+          {this.props.players.map(player => (
+            <PlayerCard key={player.id} player={player} />
+          ))}
+        </div>
       </div>
     );
   }
