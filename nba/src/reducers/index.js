@@ -2,14 +2,20 @@ import {
   FETCH_START,
   FETCH_SUCCESS,
   FETCH_FAILURE,
-  SEARCH_PLAYER
+  SEARCH_PLAYER,
+  LOGIN_START,
+  LOGIN_SUCCESS,
+  LOGIN_FAILURE
 } from "../actions";
 
 const initialState = {
   players: [],
   isFetching: false,
   isSearching: false,
-  err: null
+  isLoggingIn: false,
+  isRegisteringUser: false,
+  err: null,
+  token: null
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -40,6 +46,16 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         players: filteredPlayers
+      };
+    case LOGIN_START:
+      return {
+        ...state,
+        isLoggingIn: true
+      };
+    case LOGIN_SUCCESS:
+      return {
+        ...state,
+        isLoggingIn: false
       };
     default:
       return state;
