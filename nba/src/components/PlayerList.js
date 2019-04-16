@@ -15,8 +15,9 @@ class PlayerList extends React.Component {
   componentDidMount() {
     this.props.fetchData();
     axios
-      .get("http://localhost:5000/api/teams")
+      .get("https://nbacareers.herokuapp.com/api/teams/")
       .then(res => {
+        console.log(res);
         this.setState({ teams: res.data });
       })
       .catch(err => console.log(err));

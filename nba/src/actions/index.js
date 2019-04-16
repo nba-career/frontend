@@ -7,7 +7,7 @@ export const FETCH_FAILURE = "FETCH_FAILURE";
 export const fetchData = () => dispatch => {
   dispatch({ type: FETCH_START });
   axios
-    .get("http://localhost:5000/api/players")
+    .get("https://nbacareers.herokuapp.com/api/players/")
     .then(res => {
       console.log(res);
       dispatch({
