@@ -8,6 +8,7 @@ import PlayerPageTwo from "./components/PlayerPageTwo";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Home from "./components/Home";
+import Survival from "./components/Survival";
 
 class App extends Component {
   render() {
@@ -20,6 +21,7 @@ class App extends Component {
             <Link to="/player-list">Player List</Link>
             {/* <Link to="/player/random">Random Player</Link> */}
             <Link to="/player">Player</Link>
+            <Link to="/survival">Survival by Era</Link>
           </nav>
           <Route exact path="/" component={Home} />
           <Route path="/register" component={Register} />
@@ -27,6 +29,7 @@ class App extends Component {
           <Route path="/player-list" component={PlayerList} />
           {/* <Route path="/player/random" component={PlayerPage} /> */}
           <Route exact path="/player" component={PlayerPageTwo} />
+          <Route path="/survival" component={Survival} />
         </div>
       </Router>
     );
