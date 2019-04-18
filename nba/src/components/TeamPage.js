@@ -103,11 +103,11 @@ const styles = theme => ({
   },
   dropdown: {
     display: "block",
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: 700,
     color: "#444",
     lineHeight: 1.3,
-    padding: ".6em 1.4em .5em .8em",
+    padding: ".9em 1.4em .7em .8em",
     width: "100%",
     maxWidth: "100%",
     boxSizing: "border-box",
