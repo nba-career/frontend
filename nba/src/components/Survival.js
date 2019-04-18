@@ -119,23 +119,24 @@ class Survival extends React.Component {
   };
 
   componentDidMount() {
-    this.props.fetchData().then(res => {
-      if (!this.state.player) {
-        console.log(this.props.playerCount);
-        const randomID = Math.floor(
-          Math.random() * Math.floor(this.props.playerCount)
-        );
-        axios
-          .get(`https://nbacareers.herokuapp.com/api/players/${randomID}`)
-          .then(res => {
-            console.log(res);
-            this.setState({
-              player: res.data
-            });
-          })
-          .catch(err => console.log(err));
-      }
-    });
+    // this.props.fetchData().then(res => {
+    //   if (!this.state.player) {
+    //     console.log(this.props.playerCount);
+    //     const randomID = Math.floor(
+    //       Math.random() * Math.floor(this.props.playerCount)
+    //     );
+    //     axios
+    //       .get(`https://nbacareers.herokuapp.com/api/players/${randomID}`)
+    //       .then(res => {
+    //         console.log(res);
+    //         this.setState({
+    //           player: res.data
+    //         });
+    //       })
+    //       .catch(err => console.log(err));
+    //   }
+    // });
+    // What do we need for the survival mount? Can choose a default combo that seems interesting
   }
 
   handleChangesEra = e => {
@@ -326,6 +327,7 @@ class Survival extends React.Component {
 // };
 
 const mapStateToProps = state => ({
+  players: state.players,
   playerCount: state.playerCount
 });
 

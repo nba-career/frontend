@@ -9,6 +9,7 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import Home from "./components/Home";
 import Survival from "./components/Survival";
+import TeamPage from "./components/TeamPage";
 
 class App extends Component {
   render() {
@@ -23,6 +24,7 @@ class App extends Component {
             <Link to="/player">RandomPlayer</Link>
             <Link to="/player/500">Specific Player</Link>
             <Link to="/survival">Survival by Era</Link>
+            <Link to="/team/1">Team Page</Link>
           </nav>
           <Route exact path="/" component={Home} />
           <Route path="/register" component={Register} />
@@ -30,6 +32,7 @@ class App extends Component {
           <Route path="/player-list" component={PlayerList} />
           <Route path="/player/:id" component={PlayerPage} />
           <Route exact path="/player" component={PlayerPageTwo} />
+          <Route path="/team/:id" component={TeamPage} />
           <Route path="/survival" component={Survival} />
         </div>
       </Router>
