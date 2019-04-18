@@ -49,7 +49,7 @@ const styles = theme => ({
     backgroundColor: theme.palette.grey[800],
     color: theme.palette.common.white,
     marginBottom: theme.spacing.unit * 4,
-    minHeight: "500px",
+    minHeight: 500,
     padding: "auto"
   },
   mainFeaturedPostContent: {
@@ -208,8 +208,10 @@ class PlayerPage extends React.Component {
             <Grid item md={6}>
               <div className={classes.mainFeaturedPostContent}>
                 <Typography component="h2" variant="h3" color="inherit">
-                  Prediction: {currPlayer && currPlayer.predictions} year NBA
-                  career
+                  NBACP Prediction:{" "}
+                  {currPlayer.predictions
+                    ? `${currPlayer.predictions} year NBA career`
+                    : "Insufficient Data"}
                 </Typography>
               </div>
             </Grid>

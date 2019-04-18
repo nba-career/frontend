@@ -209,8 +209,10 @@ class PlayerPageTwo extends React.Component {
             <Grid item md={6}>
               <div className={classes.mainFeaturedPostContent}>
                 <Typography component="h2" variant="h3" color="inherit">
-                  Prediction: {currPlayer && currPlayer.predictions} year NBA
-                  career
+                  NBACP Prediction:{" "}
+                  {currPlayer.predictions
+                    ? `${currPlayer.predictions} year NBA career`
+                    : "Insufficient Data"}
                 </Typography>
               </div>
             </Grid>
