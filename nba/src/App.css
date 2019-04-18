@@ -1,8 +1,6 @@
 .App {
   font-family: "Roboto", sans-serif;
-
   text-align: center;
-  max-width: 90%;
   margin: 0 auto;
 }
 
@@ -19,6 +17,17 @@
   min-width: 200px;
 }
 
+nav {
+  background: linear-gradient(90deg, #020024 7%, #26665b 59%, #0e2d33 100%);
+  padding: 35px 0;
+  display: flex; 
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
 nav a {
   margin: 0 10px;
+  color: #fcfcfc;
+  font-size: 16px;
+  font-weight: 600;
 }
