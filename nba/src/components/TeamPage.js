@@ -101,6 +101,9 @@ const styles = theme => ({
   cardMedia: {
     width: 160
   },
+  dropdown: {
+    height: 20
+  },
   table: {
     minWidth: 700
   },
@@ -117,7 +120,7 @@ const styles = theme => ({
   logo: {
     width: 100,
     height: 100,
-    margin: 25
+    margin: "0 auto"
   },
   footer: {
     backgroundColor: theme.palette.background.paper,
@@ -259,7 +262,11 @@ class PlayerPageTwo extends React.Component {
         console.log(logoRefs);
         return (
           <>
-            <select onChange={this.updateTeam} value={this.state.currentTeam}>
+            <select
+              className={classes.dropdown}
+              onChange={this.updateTeam}
+              value={this.state.currentTeam}
+            >
               {this.state.teams ? (
                 this.state.teams.map((team, index) => (
                   <option key={index} value={team.team}>
