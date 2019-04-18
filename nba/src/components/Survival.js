@@ -138,11 +138,43 @@ class Survival extends React.Component {
     });
   }
 
+  handleChangesEra = e => {
+    console.log(e.target.checked);
+    if (e.target.checked) {
+      this.setState({
+        era: [...this.state.era, e.target.value]
+      });
+    } else {
+      const eras = this.state.era.filter(era => era !== e.target.value);
+      this.setState({
+        era: eras
+      });
+    }
+    console.log(this.state);
+  };
+
+  handleChangesPosition = e => {
+    console.log(e.target.checked);
+    if (e.target.checked) {
+      this.setState({
+        position: [...this.state.position, e.target.value]
+      });
+    } else {
+      const positions = this.state.position.filter(
+        position => position !== e.target.value
+      );
+      this.setState({
+        position: positions
+      });
+    }
+    console.log(this.state);
+  };
+
   render() {
     const { classes } = this.props;
 
     const positions = ["G", "F", "C", "F-C", "G-F", "C-F", "F-G"];
-    const decades = [1950, 1960, 1970, 1980, 1990, 2000, 2010];
+    const decades = ["1950", "1960", "1970", "1980", "1990", "2000", "2010"];
 
     const GraphContent = () => {
       if (false) {
@@ -208,22 +240,30 @@ class Survival extends React.Component {
             <Paper className={classes.mainFeaturedPost}>
               <Grid container direction="row" alignItems="center">
                 <Grid item className={classes.userInput}>
-                  <div>
-                    {decades.map(decade => (
-                      <FormControlLabel
-                        control={<Checkbox value={decade} color="primary" />}
-                        label={decade}
-                      />
-                    ))}
-                  </div>
-                  <div>
-                    {positions.map(position => (
-                      <FormControlLabel
-                        control={<Checkbox value={position} color="primary" />}
-                        label={position}
-                      />
-                    ))}
-                  </div>
+                  <form>
+                    <div>
+                      {decades.map((decade, index) => (
+                        <FormControlLabel
+                          key={index}
+                          onChange={this.handleChangesEra}
+                          control={<Checkbox value={decade} color="primary" />}
+                          label={decade}
+                        />
+                      ))}
+                    </div>
+                    <div>
+                      {positions.map((position, index) => (
+                        <FormControlLabel
+                          key={index}
+                          onChange={this.handleChangesPosition}
+                          control={
+                            <Checkbox value={position} color="primary" />
+                          }
+                          label={position}
+                        />
+                      ))}
+                    </div>
+                  </form>
                 </Grid>
                 <GraphContent />
               </Grid>
