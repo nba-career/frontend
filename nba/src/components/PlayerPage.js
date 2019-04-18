@@ -197,7 +197,11 @@ class PlayerPage extends React.Component {
                 <Typography variant="h5" color="inherit" paragraph>
                   {currPlayer &&
                     currPlayer.height &&
-                    `${currPlayer.height}, ${currPlayer.weight}`}
+                    `${currPlayer.height}, ${currPlayer.weight} lbs`}
+                  <br />
+                  {currPlayer &&
+                    currPlayer.draftYear &&
+                    `${currPlayer.draftYear} Draft, Pick ${currPlayer.pick}`}
                 </Typography>
               </div>
             </Grid>
