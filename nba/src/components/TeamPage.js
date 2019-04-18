@@ -102,7 +102,8 @@ const styles = theme => ({
     width: 160
   },
   dropdown: {
-    height: 20
+    height: 20,
+    alignSelf: "flex-end"
   },
   table: {
     minWidth: 700
@@ -121,7 +122,7 @@ const styles = theme => ({
   logo: {
     width: 100,
     height: 100,
-    margin: "0 auto"
+    margin: "10px auto"
   },
   footer: {
     backgroundColor: theme.palette.background.paper,
@@ -204,6 +205,7 @@ class PlayerPageTwo extends React.Component {
   handleChanges = e => {
     console.log(e.target.value);
     this.setState({
+      ...this.state,
       [e.target.name]: e.target.value
     });
     this.fetchTeamPlayers();
@@ -218,6 +220,7 @@ class PlayerPageTwo extends React.Component {
       .then(res => {
         console.log(res);
         this.setState({
+          ...this.state,
           player: res.data
         });
       })
@@ -240,6 +243,7 @@ class PlayerPageTwo extends React.Component {
   updateTeam = e => {
     console.log(e.target.value);
     this.setState({
+      ...this.state,
       currentTeam: e.target.value
     });
     this.fetchTeamPlayers(e.target.value);

@@ -16,7 +16,7 @@ import PrivateRoute from "./utils";
 class App extends Component {
   render() {
     return (
-      <Router forceRefresh={false}>
+      <Router>
         <div className="App">
           <nav>
             <Link to="/register">New User?</Link>
