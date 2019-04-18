@@ -243,7 +243,7 @@ class PlayerPageTwo extends React.Component {
                       scope="row"
                     >
                       <Link
-                        className={classes.tableCell}
+                        className={classes.player}
                         to={`/player/${player.id}`}
                       >
                         {player.player}
