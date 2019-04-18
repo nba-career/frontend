@@ -50,7 +50,8 @@ const styles = theme => ({
   },
 
   mainFeaturedPost: {
-    backgroundColor: theme.palette.grey[800],
+    // backgroundColor: theme.palette.grey[800],
+    background: "lightgray",
     color: theme.palette.common.white,
     marginBottom: theme.spacing.unit * 4,
     minHeight: "500px",
@@ -68,7 +69,9 @@ const styles = theme => ({
   cardDetails: {
     flex: 1
   },
-  cardMedia: {},
+  checkbox: {
+    color: "white"
+  },
   graph: {
     width: 731,
     height: 579
@@ -217,7 +220,7 @@ class Survival extends React.Component {
       } else {
         return (
           <>
-            <Grid item md={6}>
+            {/* <Grid item md={6}>
               <div className={classes.mainFeaturedPostContent}>
                 <Typography
                   component="h1"
@@ -228,7 +231,7 @@ class Survival extends React.Component {
                   Kaplan-Meier Estimate for NBA Players
                 </Typography>
               </div>
-            </Grid>
+            </Grid> */}
             <Grid item md={6}>
               <div className={classes.mainFeaturedPostContent}>
                 <CardMedia className={classes.graph} image={graph} />
@@ -272,14 +275,21 @@ class Survival extends React.Component {
               <Grid container direction="row" alignItems="center">
                 <Grid item className={classes.userInput}>
                   {/* Should I use a FormControl here? Maybe! */}
-                  <form onSubmit={this.submitData}>
+                  <form className={classes.checkbox} onSubmit={this.submitData}>
                     <div>
                       {decades.map((decade, index) => (
                         <FormControlLabel
                           key={index}
                           onChange={this.handleChangesEra}
-                          control={<Checkbox value={decade} color="primary" />}
+                          control={
+                            <Checkbox
+                              className={classes.checkbox}
+                              value={decade}
+                              color="primary"
+                            />
+                          }
                           label={decade}
+                          color="primary"
                         />
                       ))}
                     </div>
@@ -289,13 +299,19 @@ class Survival extends React.Component {
                           key={index}
                           onChange={this.handleChangesPosition}
                           control={
-                            <Checkbox value={position} color="primary" />
+                            <Checkbox
+                              className={classes.checkbox}
+                              value={position}
+                              color="blue"
+                            />
                           }
                           label={position}
                         />
                       ))}
                     </div>
-                    <Button size="small">Submit</Button>
+                    <Button className={classes.checkbox} size="small">
+                      Submit
+                    </Button>
                   </form>
                 </Grid>
                 <GraphContent />
