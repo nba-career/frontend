@@ -11,10 +11,12 @@ import Home from "./components/Home";
 import Survival from "./components/Survival";
 import TeamPage from "./components/TeamPage";
 
+import PrivateRoute from "./utils";
+
 class App extends Component {
   render() {
     return (
-      <Router forceRefresh={true}>
+      <Router forceRefresh={false}>
         <div className="App">
           <nav>
             <Link to="/register">New User?</Link>
@@ -29,10 +31,10 @@ class App extends Component {
           <Route path="/register" component={Register} />
           <Route path="/login" component={Login} />
 
-          <Route path="/player/:id" component={PlayerPage} />
-          <Route exact path="/player" component={PlayerPageTwo} />
-          <Route path="/team/:id" component={TeamPage} />
-          <Route path="/survival" component={Survival} />
+          <PrivateRoute path="/player/:id" component={PlayerPage} />
+          <PrivateRoute exact path="/player" component={PlayerPageTwo} />
+          <PrivateRoute path="/team/:id" component={TeamPage} />
+          <PrivateRoute path="/survival" component={Survival} />
         </div>
       </Router>
     );

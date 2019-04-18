@@ -43,7 +43,8 @@ export const LOGIN_FAILURE = "LOGIN_FAILURE";
 export const login = credentials => dispatch => {
   dispatch({ type: LOGIN_START });
   console.log(credentials);
-  return axios
+
+  axios
     .post("https://nbacareers.herokuapp.com/api/auth/login/", credentials)
     .then(res => {
       console.log(res);
@@ -61,6 +62,10 @@ export const login = credentials => dispatch => {
         err
       });
     });
+  return axios.post(
+    "https://nbacareers.herokuapp.com/api/auth/login/",
+    credentials
+  );
 };
 
 export const REGISTER_USER_START = "REGISTER_USER_START";
