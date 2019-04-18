@@ -116,7 +116,8 @@ class PlayerPageTwo extends React.Component {
   state = {
     teams: null,
     currentTeam: "ATL",
-    teamPlayers: null
+    teamPlayers: null,
+    search: ""
   };
 
   componentDidMount() {
@@ -313,6 +314,7 @@ class PlayerPageTwo extends React.Component {
 // };
 
 const mapStateToProps = state => ({
+  players: state.players,
   playerCount: state.playerCount
 });
 

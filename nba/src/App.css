@@ -18,3 +18,7 @@
   margin-bottom: 10px;
   min-width: 200px;
 }
+
+nav a {
+  margin: 0 10px;
+}

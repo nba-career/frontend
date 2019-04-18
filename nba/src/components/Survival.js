@@ -19,6 +19,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Hidden from "@material-ui/core/Hidden";
 import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
+import Input from "@material-ui/core/Input";
 
 import FormControl from "@material-ui/core/FormControl";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
@@ -115,7 +116,8 @@ class Survival extends React.Component {
   state = {
     open: true,
     position: [],
-    era: []
+    era: [],
+    search: ""
   };
 
   componentDidMount() {
@@ -137,6 +139,7 @@ class Survival extends React.Component {
     //   }
     // });
     // What do we need for the survival mount? Can choose a default combo that seems interesting
+    this.props.fetchData();
   }
 
   handleChangesEra = e => {
@@ -171,8 +174,28 @@ class Survival extends React.Component {
     console.log(this.state);
   };
 
+  handleChanges = e => {
+    console.log(e.target.value, this.state.search);
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  };
+
   submitData = e => {
     e.preventDefault();
+  };
+
+  submitSearch = e => {
+    e.preventDefault();
+    console.log(this.state.search);
+    const foundPlayer = this.props.players.find(player =>
+      player.player.toLowerCase().includes(this.state.search.toLowerCase())
+    );
+    console.log(foundPlayer);
+    if (foundPlayer) {
+      this.props.history.push(`/player/${foundPlayer.id}`);
+    }
+    e.target.reset();
   };
 
   render() {
@@ -232,9 +255,12 @@ class Survival extends React.Component {
             >
               NBA Career Predictor
             </Typography>
-            <IconButton>
-              <SearchIcon />
-            </IconButton>
+            <form onSubmit={this.submitSearch}>
+              <Input onChange={this.handleChanges} name="search" />
+              <IconButton>
+                <SearchIcon />
+              </IconButton>
+            </form>
             <Button variant="outlined" size="small">
               Log Out
             </Button>

@@ -108,7 +108,8 @@ const social = ["GitHub", "Twitter", "Facebook"];
 class PlayerPageTwo extends React.Component {
   state = {
     open: true,
-    player: null
+    player: null,
+    search: ""
   };
 
   componentDidMount() {
@@ -306,6 +307,7 @@ class PlayerPageTwo extends React.Component {
 // };
 
 const mapStateToProps = state => ({
+  players: state.players,
   playerCount: state.playerCount
 });
 
