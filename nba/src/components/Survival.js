@@ -289,7 +289,6 @@ class Survival extends React.Component {
                             />
                           }
                           label={decade}
-                          color="primary"
                         />
                       ))}
                     </div>
@@ -302,7 +301,7 @@ class Survival extends React.Component {
                             <Checkbox
                               className={classes.checkbox}
                               value={position}
-                              color="blue"
+                              color="primary"
                             />
                           }
                           label={position}
