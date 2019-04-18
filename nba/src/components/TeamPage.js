@@ -22,7 +22,40 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Input from "@material-ui/core/Input";
 
+import CardMedia from "@material-ui/core/CardMedia";
+
 import Loader from "react-loader-spinner";
+
+import ATL from "../assets/atl-logo.png";
+import NJN from "../assets/bkn-logo.png";
+import BOS from "../assets/bos-logo.png";
+import CHA from "../assets/cha-logo.png";
+import CHI from "../assets/chi-logo.png";
+import CLE from "../assets/cle-logo.png";
+import DAL from "../assets/dal-logo.png";
+import DET from "../assets/det-logo.png";
+import GSW from "../assets/gsw-logo.png";
+import HOU from "../assets/hou-logo.png";
+import IND from "../assets/ind-logo.png";
+import LAC from "../assets/lac-logo.png";
+import LAL from "../assets/lal-logo.png";
+import MEM from "../assets/mem-logo.png";
+import MIA from "../assets/mia-logo.png";
+import MIL from "../assets/mil-logo.png";
+import MIN from "../assets/min-logo.png";
+import NOH from "../assets/nop-logo.png";
+import NYK from "../assets/nyk-logo.png";
+import OKC from "../assets/okc-logo.png";
+import ORL from "../assets/orl-logo.png";
+import PHI from "../assets/phi-logo.png";
+import PHO from "../assets/pho-logo.png";
+import POR from "../assets/por-logo.png";
+import SAC from "../assets/sac-logo.png";
+import SAS from "../assets/sas-logo.png";
+import SEA from "../assets/sea-logo.png";
+import TOR from "../assets/tor-logo.png";
+import UTA from "../assets/uta-logo.png";
+import WAS from "../assets/was-logo.png";
 
 const styles = theme => ({
   layout: {
@@ -81,7 +114,11 @@ const styles = theme => ({
       textDecoration: "underline"
     }
   },
-
+  logo: {
+    width: 100,
+    height: 100,
+    margin: 25
+  },
   footer: {
     backgroundColor: theme.palette.background.paper,
     marginTop: theme.spacing.unit * 8,
@@ -89,35 +126,38 @@ const styles = theme => ({
   }
 });
 
-const featuredPosts = [
-  {
-    title: "Featured post",
-    date: "Nov 12",
-    description:
-      "This is a wider card with supporting text below as a natural lead-in to additional content."
-  },
-  {
-    title: "Post title",
-    date: "Nov 11",
-    description:
-      "This is a wider card with supporting text below as a natural lead-in to additional content."
-  }
-];
-
-const archives = [
-  "March 2020",
-  "February 2020",
-  "January 2020",
-  "December 2019",
-  "November 2019",
-  "October 2019",
-  "September 2019",
-  "August 2019",
-  "July 2019",
-  "June 2019",
-  "May 2019",
-  "April 2019"
-];
+const logoRefs = {
+  ATL,
+  NJN,
+  BOS,
+  CHA,
+  CHI,
+  CLE,
+  DAL,
+  DET,
+  GSW,
+  HOU,
+  IND,
+  LAC,
+  LAL,
+  MEM,
+  MIA,
+  MIL,
+  MIN,
+  NOH,
+  NYK,
+  OKC,
+  ORL,
+  PHI,
+  PHO,
+  POR,
+  SAC,
+  SAS,
+  SEA,
+  TOR,
+  UTA,
+  WAS
+};
 
 const social = ["GitHub", "Twitter", "Facebook"];
 
@@ -215,6 +255,8 @@ class PlayerPageTwo extends React.Component {
           />
         );
       } else {
+        console.log(this.state.currentTeam);
+        console.log(logoRefs);
         return (
           <>
             <select onChange={this.updateTeam} value={this.state.currentTeam}>
@@ -228,6 +270,10 @@ class PlayerPageTwo extends React.Component {
                 <option>Loading...</option>
               )}
             </select>
+            <CardMedia
+              className={classes.logo}
+              image={logoRefs[this.state.currentTeam]}
+            />
             <Table className={classes.table}>
               <TableHead>
                 <TableRow>
