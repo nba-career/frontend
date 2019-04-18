@@ -74,6 +74,7 @@ class Login extends React.Component {
       })
       .catch(err => {
         console.log(err);
+        alert("Invalid username/password combination");
       });
     e.target.reset();
   };
