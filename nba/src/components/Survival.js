@@ -19,11 +19,14 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Hidden from "@material-ui/core/Hidden";
 import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
-import graph from "../assets/survival-graph.png";
-import logo from "../assets/bos-logo.png";
+
+import FormControl from "@material-ui/core/FormControl";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
 
 import Loader from "react-loader-spinner";
 
+import graph from "../assets/survival-graph.png";
 const styles = theme => ({
   layout: {
     width: "auto",
@@ -138,7 +141,8 @@ class Survival extends React.Component {
   render() {
     const { classes } = this.props;
 
-    const currPlayer = this.state.player;
+    const positions = ["G", "F", "C", "F-C", "G-F", "C-F", "F-G"];
+    const decades = [1950, 1960, 1970, 1980, 1990, 2000, 2010];
 
     const GraphContent = () => {
       if (false) {
@@ -202,7 +206,25 @@ class Survival extends React.Component {
           <main>
             {/* Main featured post */}
             <Paper className={classes.mainFeaturedPost}>
-              <Grid container direction="column" alignItems="center">
+              <Grid container direction="row" alignItems="center">
+                <Grid item className={classes.userInput}>
+                  <div>
+                    {decades.map(decade => (
+                      <FormControlLabel
+                        control={<Checkbox value={decade} color="primary" />}
+                        label={decade}
+                      />
+                    ))}
+                  </div>
+                  <div>
+                    {positions.map(position => (
+                      <FormControlLabel
+                        control={<Checkbox value={position} color="primary" />}
+                        label={position}
+                      />
+                    ))}
+                  </div>
+                </Grid>
                 <GraphContent />
               </Grid>
             </Paper>
