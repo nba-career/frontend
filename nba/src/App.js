@@ -13,15 +13,15 @@ import Survival from "./components/Survival";
 class App extends Component {
   render() {
     return (
-      <Router>
+      <Router forceRefresh={true}>
         <div className="App">
           <nav>
             <Link to="/register">New User?</Link>
             <Link to="/login">Login</Link>
             <Link to="/player-list">Player List</Link>
             {/* <Link to="/player/random">Random Player</Link> */}
-            <Link to="/player">Player</Link>
-            <Link to="/player/5">Specific Player</Link>
+            <Link to="/player">RandomPlayer</Link>
+            <Link to="/player/500">Specific Player</Link>
             <Link to="/survival">Survival by Era</Link>
           </nav>
           <Route exact path="/" component={Home} />

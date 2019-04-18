@@ -19,8 +19,10 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Hidden from "@material-ui/core/Hidden";
 import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
+import Input from "@material-ui/core/Input";
 
 import Loader from "react-loader-spinner";
+import { FormControl } from "@material-ui/core";
 
 const styles = theme => ({
   layout: {
@@ -107,10 +109,15 @@ const social = ["GitHub", "Twitter", "Facebook"];
 class PlayerPage extends React.Component {
   state = {
     open: true,
-    player: null
+    player: null,
+    search: ""
   };
 
   componentDidMount() {
+    if (!this.props.players.length) {
+      this.props.fetchData();
+    }
+
     const playerID = this.props.match.params.id;
     console.log(playerID);
 
@@ -123,6 +130,13 @@ class PlayerPage extends React.Component {
         });
       });
   }
+
+  handleChanges = e => {
+    console.log(e.target.value);
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  };
 
   randomizePlayer = () => {
     const randomID = Math.floor(
@@ -137,6 +151,19 @@ class PlayerPage extends React.Component {
         });
       })
       .catch(err => console.log(err));
+  };
+
+  submitSearch = e => {
+    e.preventDefault();
+    console.log(this.state.search);
+    const foundPlayer = this.props.players.find(player =>
+      player.player.toLowerCase().includes(this.state.search.toLowerCase())
+    );
+    console.log(foundPlayer);
+    if (foundPlayer) {
+      this.props.history.push(`/player/${foundPlayer.id}`);
+    }
+    e.target.reset();
   };
 
   render() {
@@ -205,9 +232,12 @@ class PlayerPage extends React.Component {
             >
               NBA Career Predictor
             </Typography>
-            <IconButton>
-              <SearchIcon />
-            </IconButton>
+            <form onSubmit={this.submitSearch}>
+              <Input onChange={this.handleChanges} name="search" />
+              <IconButton>
+                <SearchIcon />
+              </IconButton>
+            </form>
             <Button variant="outlined" size="small">
               Log Out
             </Button>
@@ -272,6 +302,7 @@ class PlayerPage extends React.Component {
 // };
 
 const mapStateToProps = state => ({
+  players: state.players,
   playerCount: state.playerCount
 });
 
