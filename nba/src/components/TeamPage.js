@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 import { fetchData } from "../actions";
 
@@ -236,10 +237,10 @@ class PlayerPageTwo extends React.Component {
                       component="th"
                       scope="row"
                     >
-                      {player.player}
+                      <Link to={`/player/${player.id}`}>{player.player}</Link>
                     </TableCell>
                     <TableCell className={classes.tableCell} align="right">
-                      {player.predictions}
+                      {player.predictions ? player.predictions : "Unknown"}
                     </TableCell>
                   </TableRow>
                 ))}
