@@ -21,13 +21,14 @@ class App extends Component {
             <Link to="/player-list">Player List</Link>
             {/* <Link to="/player/random">Random Player</Link> */}
             <Link to="/player">Player</Link>
+            <Link to="/player/5">Specific Player</Link>
             <Link to="/survival">Survival by Era</Link>
           </nav>
           <Route exact path="/" component={Home} />
           <Route path="/register" component={Register} />
           <Route path="/login" component={Login} />
           <Route path="/player-list" component={PlayerList} />
-          {/* <Route path="/player/random" component={PlayerPage} /> */}
+          <Route path="/player/:id" component={PlayerPage} />
           <Route exact path="/player" component={PlayerPageTwo} />
           <Route path="/survival" component={Survival} />
         </div>

@@ -2,104 +2,107 @@ import React from "react";
 import { connect } from "react-redux";
 import axios from "axios";
 
-// import PropTypes from 'prop-types';
+import { fetchData } from "../actions";
 
-import classNames from "classnames";
+// import PropTypes from 'prop-types';
 import { withStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import Drawer from "@material-ui/core/Drawer";
-import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import List from "@material-ui/core/List";
-import Typography from "@material-ui/core/Typography";
-import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
-import Badge from "@material-ui/core/Badge";
-import MenuIcon from "@material-ui/icons/Menu";
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import NotificationsIcon from "@material-ui/icons/Notifications";
-import { mainListItems, secondaryListItems } from "./listitems";
-import SimpleLineChart from "./SimpleLineChart";
-import SimpleTable from "./SimpleTable";
+import SearchIcon from "@material-ui/icons/Search";
+import Paper from "@material-ui/core/Paper";
+import Typography from "@material-ui/core/Typography";
+import Grid from "@material-ui/core/Grid";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+import CardMedia from "@material-ui/core/CardMedia";
+import Hidden from "@material-ui/core/Hidden";
+import Button from "@material-ui/core/Button";
+import Divider from "@material-ui/core/Divider";
 
-const drawerWidth = 240;
+import Loader from "react-loader-spinner";
 
 const styles = theme => ({
-  root: {
-    display: "flex"
-  },
-  toolbar: {
-    paddingRight: 24 // keep right padding when drawer closed
-  },
-  toolbarIcon: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "flex-end",
-    padding: "0 8px",
-    ...theme.mixins.toolbar
-  },
-  appBar: {
-    zIndex: theme.zIndex.drawer + 1,
-    transition: theme.transitions.create(["width", "margin"], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen
-    })
-  },
-  appBarShift: {
-    marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(["width", "margin"], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen
-    })
-  },
-  menuButton: {
-    marginLeft: 12,
-    marginRight: 36
-  },
-  menuButtonHidden: {
-    display: "none"
-  },
-  title: {
-    flexGrow: 1
-  },
-  drawerPaper: {
-    position: "relative",
-    whiteSpace: "nowrap",
-    width: drawerWidth,
-    transition: theme.transitions.create("width", {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen
-    })
-  },
-  drawerPaperClose: {
-    overflowX: "hidden",
-    transition: theme.transitions.create("width", {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen
-    }),
-    width: theme.spacing.unit * 7,
-    [theme.breakpoints.up("sm")]: {
-      width: theme.spacing.unit * 9
+  layout: {
+    width: "auto",
+    marginLeft: theme.spacing.unit * 3,
+    marginRight: theme.spacing.unit * 3,
+    [theme.breakpoints.up(1100 + theme.spacing.unit * 3 * 2)]: {
+      width: 1100,
+      marginLeft: "auto",
+      marginRight: "auto"
     }
   },
-  appBarSpacer: theme.mixins.toolbar,
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing.unit * 3,
-    height: "100vh",
-    overflow: "auto"
+  toolbarMain: {
+    borderBottom: `1px solid ${theme.palette.grey[300]}`
   },
-  chartContainer: {
-    marginLeft: -22
+  toolbarTitle: {
+    flex: 1
   },
-  tableContainer: {
-    height: 320
+  toolbarSecondary: {
+    justifyContent: "space-between"
   },
-  h5: {
-    marginBottom: theme.spacing.unit * 2
+
+  mainFeaturedPost: {
+    backgroundColor: theme.palette.grey[800],
+    color: theme.palette.common.white,
+    marginBottom: theme.spacing.unit * 4,
+    minHeight: "500px",
+    padding: "auto"
+  },
+  mainFeaturedPostContent: {
+    padding: `${theme.spacing.unit * 6}px`
+  },
+  mainGrid: {
+    marginTop: theme.spacing.unit * 3
+  },
+  card: {
+    display: "flex"
+  },
+  cardDetails: {
+    flex: 1
+  },
+  cardMedia: {
+    width: 160
+  },
+  footer: {
+    backgroundColor: theme.palette.background.paper,
+    marginTop: theme.spacing.unit * 8,
+    padding: `${theme.spacing.unit * 6}px 0`
   }
 });
+
+const featuredPosts = [
+  {
+    title: "Featured post",
+    date: "Nov 12",
+    description:
+      "This is a wider card with supporting text below as a natural lead-in to additional content."
+  },
+  {
+    title: "Post title",
+    date: "Nov 11",
+    description:
+      "This is a wider card with supporting text below as a natural lead-in to additional content."
+  }
+];
+
+const archives = [
+  "March 2020",
+  "February 2020",
+  "January 2020",
+  "December 2019",
+  "November 2019",
+  "October 2019",
+  "September 2019",
+  "August 2019",
+  "July 2019",
+  "June 2019",
+  "May 2019",
+  "April 2019"
+];
+
+const social = ["GitHub", "Twitter", "Facebook"];
 
 class PlayerPage extends React.Component {
   state = {
@@ -108,7 +111,23 @@ class PlayerPage extends React.Component {
   };
 
   componentDidMount() {
-    const randomID = Math.floor(Math.random() * Math.floor(3000));
+    const playerID = this.props.match.params.id;
+    console.log(playerID);
+
+    axios
+      .get(`https://nbacareers.herokuapp.com/api/players/${playerID}`)
+      .then(res => {
+        console.log(res);
+        this.setState({
+          player: res.data
+        });
+      });
+  }
+
+  randomizePlayer = () => {
+    const randomID = Math.floor(
+      Math.random() * Math.floor(this.props.playerCount)
+    );
     axios
       .get(`https://nbacareers.herokuapp.com/api/players/${randomID}`)
       .then(res => {
@@ -118,96 +137,132 @@ class PlayerPage extends React.Component {
         });
       })
       .catch(err => console.log(err));
-  }
-
-  handleDrawerOpen = () => {
-    this.setState({ open: true });
-  };
-
-  handleDrawerClose = () => {
-    this.setState({ open: false });
   };
 
   render() {
     const { classes } = this.props;
 
+    const currPlayer = this.state.player;
+
+    const PlayerContent = () => {
+      if (!currPlayer) {
+        return (
+          <Loader
+            type="Ball-Triangle"
+            color="#FA8320"
+            height={300}
+            width={300}
+          />
+        );
+      } else {
+        return (
+          <>
+            <Grid item md={6}>
+              <div className={classes.mainFeaturedPostContent}>
+                <Typography
+                  component="h1"
+                  variant="h3"
+                  color="inherit"
+                  gutterBottom
+                >
+                  {currPlayer ? currPlayer.player : "Loading..."}
+                </Typography>
+                <Typography variant="h5" color="inherit" paragraph>
+                  {currPlayer &&
+                    currPlayer.height &&
+                    `${currPlayer.height}, ${currPlayer.weight}`}
+                </Typography>
+              </div>
+            </Grid>
+            <Grid item md={6}>
+              <div className={classes.mainFeaturedPostContent}>
+                <Typography component="h2" variant="h3" color="inherit">
+                  Prediction: {currPlayer && currPlayer.predictions} year NBA
+                  career
+                </Typography>
+              </div>
+            </Grid>
+          </>
+        );
+      }
+    };
+
     return (
-      <div className={classes.root}>
+      <React.Fragment>
         <CssBaseline />
-        <AppBar
-          position="absolute"
-          className={classNames(
-            classes.appBar,
-            this.state.open && classes.appBarShift
-          )}
-        >
-          <Toolbar
-            disableGutters={!this.state.open}
-            className={classes.toolbar}
-          >
-            <IconButton
-              color="inherit"
-              aria-label="Open drawer"
-              onClick={this.handleDrawerOpen}
-              className={classNames(
-                classes.menuButton,
-                this.state.open && classes.menuButtonHidden
-              )}
-            >
-              <MenuIcon />
-            </IconButton>
+        <div className={classes.layout}>
+          <Toolbar className={classes.toolbarMain}>
+            <Button size="small" onClick={this.randomizePlayer}>
+              Random Player
+            </Button>
             <Typography
-              component="h1"
-              variant="h6"
+              component="h2"
+              variant="h5"
               color="inherit"
+              align="center"
               noWrap
-              className={classes.title}
+              className={classes.toolbarTitle}
             >
-              {this.state.player ? this.state.player.player : "Loading..."}
+              NBA Career Predictor
             </Typography>
-            <IconButton color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <NotificationsIcon />
-              </Badge>
+            <IconButton>
+              <SearchIcon />
             </IconButton>
+            <Button variant="outlined" size="small">
+              Log Out
+            </Button>
           </Toolbar>
-        </AppBar>
-        <Drawer
-          variant="permanent"
-          classes={{
-            paper: classNames(
-              classes.drawerPaper,
-              !this.state.open && classes.drawerPaperClose
-            )
-          }}
-          open={this.state.open}
-        >
-          <div className={classes.toolbarIcon}>
-            <IconButton onClick={this.handleDrawerClose}>
-              <ChevronLeftIcon />
-            </IconButton>
-          </div>
-          <Divider />
-          <List>{mainListItems}</List>
-          <Divider />
-          <List>{secondaryListItems}</List>
-        </Drawer>
-        <main className={classes.content}>
-          <div className={classes.appBarSpacer} />
-          <Typography variant="h4" gutterBottom component="h2">
-            Orders
+
+          <main>
+            {/* Main featured post */}
+            <Paper className={classes.mainFeaturedPost}>
+              <Grid container direction="row">
+                <PlayerContent />
+              </Grid>
+            </Paper>
+            {/* End main featured post */}
+            {/* Sub featured posts */}
+            <Grid container spacing={40} className={classes.cardGrid}>
+              {featuredPosts.map(post => (
+                <Grid item key={post.title} xs={12} md={6}>
+                  <Card className={classes.card}>
+                    <div className={classes.cardDetails}>
+                      <CardContent>
+                        <Typography component="h2" variant="h5">
+                          Link Goes Here
+                        </Typography>
+                      </CardContent>
+                    </div>
+                    {/* <Hidden xsDown>
+                      <CardMedia
+                        className={classes.cardMedia}
+                        image="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22288%22%20height%3D%22225%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20288%20225%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_164edaf95ee%20text%20%7B%20fill%3A%23eceeef%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A14pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_164edaf95ee%22%3E%3Crect%20width%3D%22288%22%20height%3D%22225%22%20fill%3D%22%2355595c%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2296.32500076293945%22%20y%3D%22118.8%22%3EThumbnail%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" // eslint-disable-line max-len
+                        title="Image title"
+                      />
+                    </Hidden> */}
+                  </Card>
+                </Grid>
+              ))}
+            </Grid>
+            {/* End sub featured posts */}
+          </main>
+        </div>
+        {/* Footer */}
+        <footer className={classes.footer}>
+          <Typography variant="h6" align="center" gutterBottom>
+            Footer
           </Typography>
-          <Typography component="div" className={classes.chartContainer}>
-            <SimpleLineChart />
+          <Typography
+            variant="subtitle1"
+            align="center"
+            color="textSecondary"
+            component="p"
+          >
+            Need something here; may replicate top nav with different style
           </Typography>
-          <Typography variant="h4" gutterBottom component="h2">
-            Products
-          </Typography>
-          <div className={classes.tableContainer}>
-            <SimpleTable />
-          </div>
-        </main>
-      </div>
+        </footer>
+        {/* End footer */}
+      </React.Fragment>
     );
   }
 }
@@ -216,7 +271,11 @@ class PlayerPage extends React.Component {
 //   classes: PropTypes.object.isRequired,
 // };
 
+const mapStateToProps = state => ({
+  playerCount: state.playerCount
+});
+
 export default connect(
-  null,
-  {}
+  mapStateToProps,
+  { fetchData }
 )(withStyles(styles)(PlayerPage));

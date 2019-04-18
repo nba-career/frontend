@@ -174,8 +174,9 @@ class PlayerPageTwo extends React.Component {
                   {currPlayer ? currPlayer.player : "Loading..."}
                 </Typography>
                 <Typography variant="h5" color="inherit" paragraph>
-                  {currPlayer && currPlayer.height},{" "}
-                  {currPlayer && currPlayer.weight}
+                  {currPlayer &&
+                    currPlayer.height &&
+                    `${currPlayer.height}, ${currPlayer.weight}`}
                 </Typography>
               </div>
             </Grid>

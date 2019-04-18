@@ -170,6 +170,10 @@ class Survival extends React.Component {
     console.log(this.state);
   };
 
+  submitData = e => {
+    e.preventDefault();
+  };
+
   render() {
     const { classes } = this.props;
 
@@ -240,7 +244,8 @@ class Survival extends React.Component {
             <Paper className={classes.mainFeaturedPost}>
               <Grid container direction="row" alignItems="center">
                 <Grid item className={classes.userInput}>
-                  <form>
+                  {/* Should I use a FormControl here? Maybe! */}
+                  <form onSubmit={this.submitData}>
                     <div>
                       {decades.map((decade, index) => (
                         <FormControlLabel
@@ -263,6 +268,7 @@ class Survival extends React.Component {
                         />
                       ))}
                     </div>
+                    <Button size="small">Submit</Button>
                   </form>
                 </Grid>
                 <GraphContent />
