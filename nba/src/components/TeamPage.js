@@ -74,6 +74,11 @@ const styles = theme => ({
   tableCell: {
     color: "white"
   },
+  player: {
+    color: "white",
+    textDecoration: "none"
+  },
+
   footer: {
     backgroundColor: theme.palette.background.paper,
     marginTop: theme.spacing.unit * 8,
@@ -237,7 +242,12 @@ class PlayerPageTwo extends React.Component {
                       component="th"
                       scope="row"
                     >
-                      <Link to={`/player/${player.id}`}>{player.player}</Link>
+                      <Link
+                        className={classes.tableCell}
+                        to={`/player/${player.id}`}
+                      >
+                        {player.player}
+                      </Link>
                     </TableCell>
                     <TableCell className={classes.tableCell} align="right">
                       {player.predictions ? player.predictions : "Unknown"}
