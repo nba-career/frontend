@@ -76,7 +76,10 @@ const styles = theme => ({
   },
   player: {
     color: "white",
-    textDecoration: "none"
+    textDecoration: "none",
+    "&:hover": {
+      textDecoration: "underline"
+    }
   },
 
   footer: {
