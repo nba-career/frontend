@@ -4,7 +4,7 @@ const PlayerCard = ({ player }) => {
   return (
     <div className="playerCard">
       <p>{player.player}</p>
-      <p>{`${player.draftYear} Draft: Pick #${player.pick}`}</p>
+      <p>{`${player.id}`}</p>
     </div>
   );
 };

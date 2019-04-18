@@ -10,6 +10,7 @@ import {
 
 const initialState = {
   players: [],
+  playerCount: 0,
   isFetching: false,
   isSearching: false,
   isLoggingIn: false,
@@ -29,7 +30,8 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         isFetching: false,
-        players: action.players
+        players: action.players,
+        playerCount: action.players.length
       };
     case FETCH_FAILURE:
       return {

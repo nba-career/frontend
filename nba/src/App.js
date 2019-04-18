@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 import "./App.css";
 import PlayerList from "./components/PlayerList";
+import PlayerPage from "./components/PlayerPage";
+import PlayerPageTwo from "./components/PlayerPageTwo";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Home from "./components/Home";
@@ -15,12 +17,16 @@ class App extends Component {
           <nav>
             <Link to="/register">New User?</Link>
             <Link to="/login">Login</Link>
-            <Link to="/player-list">Players</Link>
+            <Link to="/player-list">Player List</Link>
+            {/* <Link to="/player/random">Random Player</Link> */}
+            <Link to="/player">Player</Link>
           </nav>
           <Route exact path="/" component={Home} />
           <Route path="/register" component={Register} />
           <Route path="/login" component={Login} />
           <Route path="/player-list" component={PlayerList} />
+          {/* <Route path="/player/random" component={PlayerPage} /> */}
+          <Route exact path="/player" component={PlayerPageTwo} />
         </div>
       </Router>
     );

@@ -6,22 +6,26 @@ export const FETCH_FAILURE = "FETCH_FAILURE";
 
 export const fetchData = () => dispatch => {
   dispatch({ type: FETCH_START });
-  axios
-    .get("https://nbacareers.herokuapp.com/api/players/")
-    .then(res => {
-      console.log(res);
-      dispatch({
-        type: FETCH_SUCCESS,
-        players: res.data
-      });
-    })
-    .catch(err => {
-      console.log(err);
-      dispatch({
-        type: FETCH_FAILURE,
-        err
-      });
-    });
+  return (
+    axios
+      // .get("https://nbacareers.herokuapp.com/api/players/")
+      // Switching to names api for faster initial load, focusing on single player returns using id from this list
+      .get("https://nbacareers.herokuapp.com/api/players/names")
+      .then(res => {
+        console.log(res);
+        dispatch({
+          type: FETCH_SUCCESS,
+          players: res.data
+        });
+      })
+      .catch(err => {
+        console.log(err);
+        dispatch({
+          type: FETCH_FAILURE,
+          err
+        });
+      })
+  );
 };
 
 export const SEARCH_PLAYER = "SEARCH_PLAYER";
