@@ -108,7 +108,8 @@ const styles = theme => ({
     minWidth: 700
   },
   tableCell: {
-    color: "white"
+    color: "white",
+    fontSize: 16
   },
   player: {
     color: "white",
