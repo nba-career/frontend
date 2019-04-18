@@ -130,6 +130,21 @@ class PlayerPageTwo extends React.Component {
     });
   }
 
+  randomizePlayer = () => {
+    const randomID = Math.floor(
+      Math.random() * Math.floor(this.props.playerCount)
+    );
+    axios
+      .get(`https://nbacareers.herokuapp.com/api/players/${randomID}`)
+      .then(res => {
+        console.log(res);
+        this.setState({
+          player: res.data
+        });
+      })
+      .catch(err => console.log(err));
+  };
+
   render() {
     const { classes } = this.props;
 
@@ -182,7 +197,9 @@ class PlayerPageTwo extends React.Component {
         <CssBaseline />
         <div className={classes.layout}>
           <Toolbar className={classes.toolbarMain}>
-            <Button size="small">Random Player</Button>
+            <Button size="small" onClick={this.randomizePlayer}>
+              Random Player
+            </Button>
             <Typography
               component="h2"
               variant="h5"
