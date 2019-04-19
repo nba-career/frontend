@@ -23,7 +23,7 @@ class App extends Component {
             <Link to="/login">Login</Link>
 
             <Link to="/player">Random Player</Link>
-            <Link to="/player/500">Specific Player</Link>
+
             <Link to="/survival">Survival by Era</Link>
             <Link to="/team/1">Team Page</Link>
           </nav>
