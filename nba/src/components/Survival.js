@@ -13,16 +13,14 @@ import SearchIcon from "@material-ui/icons/Search";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
+
 import CardMedia from "@material-ui/core/CardMedia";
-import Hidden from "@material-ui/core/Hidden";
+
 import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
 
 import Input from "@material-ui/core/Input";
 
-import FormControl from "@material-ui/core/FormControl";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 
@@ -45,7 +43,8 @@ const styles = theme => ({
     borderBottom: `1px solid ${theme.palette.grey[300]}`
   },
   toolbarTitle: {
-    flex: 1
+    flex: 1,
+    textDecoration: "underline"
   },
   toolbarSecondary: {
     justifyContent: "space-between"
@@ -298,10 +297,9 @@ class Survival extends React.Component {
         <CssBaseline />
         <div className={classes.layout}>
           <Toolbar className={classes.toolbarMain}>
-            <Button size="small">Random Player</Button>
             <Typography
               component="h2"
-              variant="h5"
+              variant="h4"
               color="inherit"
               align="center"
               noWrap
@@ -376,6 +374,18 @@ class Survival extends React.Component {
             {/* End main featured post */}
           </main>
         </div>
+        {/* Footer */}
+        <footer className={classes.footer}>
+          <Typography
+            variant="subtitle1"
+            align="center"
+            color="textSecondary"
+            component="p"
+          >
+            Copyright 2019, NBACP Team
+          </Typography>
+        </footer>
+        {/* End footer */}
       </React.Fragment>
     );
   }

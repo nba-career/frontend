@@ -2,8 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 import { login } from "../actions";
 
-import PropTypes from "prop-types";
-
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -131,10 +129,6 @@ class Login extends React.Component {
     );
   }
 }
-
-// Login.propTypes = {
-//   classes: PropTypes.object.isRequired
-// };
 
 export default connect(
   null,
