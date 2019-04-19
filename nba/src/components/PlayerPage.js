@@ -117,8 +117,6 @@ const archives = [
   "April 2019"
 ];
 
-const social = ["GitHub", "Twitter", "Facebook"];
-
 class PlayerPage extends React.Component {
   state = {
     open: true,
@@ -167,7 +165,6 @@ class PlayerPage extends React.Component {
   };
 
   submitSearch = e => {
-    e.preventDefault();
     console.log(this.state.search);
     const foundPlayer = this.props.players.find(player =>
       player.player.toLowerCase().includes(this.state.search.toLowerCase())

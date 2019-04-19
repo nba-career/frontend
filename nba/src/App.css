@@ -4,19 +4,6 @@
   margin: 0 auto;
 }
 
-.playerCardContainer {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-}
-
-.playerCard {
-  border: 2px solid orange;
-  padding: 5px;
-  margin-bottom: 10px;
-  min-width: 200px;
-}
-
 nav {
   background: linear-gradient(90deg, #020024 7%, #26665b 59%, #0e2d33 100%);
   padding: 35px 0;
