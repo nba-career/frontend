@@ -32,6 +32,7 @@ import CHA from "../assets/cha-logo.png";
 import CHI from "../assets/chi-logo.png";
 import CLE from "../assets/cle-logo.png";
 import DAL from "../assets/dal-logo.png";
+import DEN from "../assets/den-logo.png";
 import DET from "../assets/det-logo.png";
 import GSW from "../assets/gsw-logo.png";
 import HOU from "../assets/hou-logo.png";
@@ -157,6 +158,7 @@ const logoRefs = {
   CHI,
   CLE,
   DAL,
+  DEN,
   DET,
   GSW,
   HOU,
