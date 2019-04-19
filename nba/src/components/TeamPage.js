@@ -43,7 +43,7 @@ import MEM from "../assets/mem-logo.png";
 import MIA from "../assets/mia-logo.png";
 import MIL from "../assets/mil-logo.png";
 import MIN from "../assets/min-logo.png";
-import NOH from "../assets/nop-logo.png";
+import NOP from "../assets/nop-logo.png";
 import NYK from "../assets/nyk-logo.png";
 import OKC from "../assets/okc-logo.png";
 import ORL from "../assets/orl-logo.png";
@@ -169,7 +169,7 @@ const logoRefs = {
   MIA,
   MIL,
   MIN,
-  NOH,
+  NOP,
   NYK,
   OKC,
   ORL,
@@ -297,11 +297,16 @@ class PlayerPageTwo extends React.Component {
               value={this.state.currentTeam}
             >
               {this.state.teams ? (
-                this.state.teams.map((team, index) => (
-                  <option key={index} value={team.team}>
-                    {team.team}
-                  </option>
-                ))
+                this.state.teams.map((team, index) => {
+                  console.log(team);
+                  if (team.team !== "NJN" && team.team !== "NOH") {
+                    return (
+                      <option key={index} value={team.team}>
+                        {team.team}
+                      </option>
+                    );
+                  }
+                })
               ) : (
                 <option>Loading...</option>
               )}
