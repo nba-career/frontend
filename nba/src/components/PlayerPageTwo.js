@@ -258,7 +258,7 @@ class PlayerPageTwo extends React.Component {
             </Paper>
             {/* End main featured post */}
           </main>
-        </div>{" "}
+        </div>
         <Button
           variant="contained"
           size="large"

@@ -236,7 +236,9 @@ class PlayerPage extends React.Component {
                   Prediction
                 </Typography>
                 <Typography component="h4" variant="h5" color="inherit">
-                  {currPlayer && currPlayer.predictions} year NBA career
+                  {currPlayer.predictions
+                    ? `${currPlayer.predictions} year NBA career`
+                    : "Insufficient data available"}
                 </Typography>
               </div>
             </Grid>
@@ -281,6 +283,15 @@ class PlayerPage extends React.Component {
             {/* End main featured post */}
           </main>
         </div>
+        <Button
+          variant="contained"
+          size="large"
+          color="primary"
+          onClick={this.randomizePlayer}
+          className={classes.randomButton}
+        >
+          Random Player
+        </Button>
         {/* Footer */}
         <footer className={classes.footer}>
           <Typography
