@@ -26,7 +26,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Loader from "react-loader-spinner";
 
 import ATL from "../assets/atl-logo.png";
-import NJN from "../assets/bkn-logo.png";
+import BKN from "../assets/bkn-logo.png";
 import BOS from "../assets/bos-logo.png";
 import CHA from "../assets/cha-logo.png";
 import CHI from "../assets/chi-logo.png";
@@ -151,7 +151,7 @@ const styles = theme => ({
 
 const logoRefs = {
   ATL,
-  NJN,
+  BKN,
   BOS,
   CHA,
   CHI,
