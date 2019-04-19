@@ -77,7 +77,9 @@ const styles = theme => ({
     background: `${theme.palette.grey[400]}`,
     width: "80%"
   },
-
+  formTitle: {
+    marginTop: 10
+  },
   checkboxColumn: {
     display: "flex",
     flexWrap: "wrap",
@@ -221,8 +223,8 @@ class Survival extends React.Component {
     this.setState({
       ...this.state,
       title: `Kaplan-Meier Estimate for NBA ${this.state.positions.join(
-        ", "
-      )} on Roster at Start of First Season in the ${this.state.era.join(
+        "s, "
+      )}s on Roster at Start of First Season in the ${this.state.era.join(
         "s, "
       )}s`
     });
@@ -246,10 +248,6 @@ class Survival extends React.Component {
 
     const positions = ["G", "F", "C", "F-C", "G-F", "C-F", "F-G"];
     const decades = ["1950", "1960", "1970", "1980", "1990", "2000", "2010"];
-
-    const title = `Kaplan-Meier Estimate for NBA ${this.state.positions.join(
-      ", "
-    )} on Roster at Start of First Season in ${this.state.era.join(", ")}`;
 
     const GraphContent = () => {
       if (false) {
@@ -330,6 +328,16 @@ class Survival extends React.Component {
                 <Grid item className={classes.userInput}>
                   {/* Should I use a FormControl here? Maybe! */}
                   <form className={classes.checkbox} onSubmit={this.submitData}>
+                    <Typography
+                      component="h3"
+                      variant="h5"
+                      color="inherit"
+                      align="center"
+                      noWrap
+                      className={classes.formTitle}
+                    >
+                      Eras
+                    </Typography>
                     <div className={classes.checkboxColumn}>
                       {decades.map((decade, index) => (
                         <FormControlLabel
@@ -347,6 +355,16 @@ class Survival extends React.Component {
                       ))}
                     </div>
                     <Divider />
+                    <Typography
+                      component="h3"
+                      variant="h5"
+                      color="inherit"
+                      align="center"
+                      noWrap
+                      className={classes.formTitle}
+                    >
+                      Positions
+                    </Typography>
                     <div>
                       {positions.map((position, index) => (
                         <FormControlLabel
@@ -363,7 +381,11 @@ class Survival extends React.Component {
                         />
                       ))}
                     </div>
-                    <Button onClick={this.submitData} size="small">
+                    <Button
+                      variant="outlined"
+                      onClick={this.submitData}
+                      size="medium"
+                    >
                       Submit
                     </Button>
                   </form>
