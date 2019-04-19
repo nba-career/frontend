@@ -223,7 +223,9 @@ class Survival extends React.Component {
       ...this.state,
       title: `Kaplan-Meier Estimate for NBA ${this.state.positions.join(
         ", "
-      )} on Roster at Start of First Season in ${this.state.era.join(", ")}`
+      )} on Roster at Start of First Season in the ${this.state.era.join(
+        "s, "
+      )}s`
     });
   };
 
