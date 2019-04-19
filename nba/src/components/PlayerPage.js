@@ -36,6 +36,7 @@ const styles = theme => ({
     }
   },
   toolbarMain: {
+    background: theme.palette.grey[100],
     borderBottom: `1px solid ${theme.palette.grey[300]}`
   },
   toolbarTitle: {
@@ -46,20 +47,32 @@ const styles = theme => ({
   },
 
   mainFeaturedPost: {
-    backgroundColor: theme.palette.grey[800],
-    color: theme.palette.common.white,
+    backgroundColor: theme.palette.grey[300],
+    color: theme.palette.common.black,
     marginBottom: theme.spacing.unit * 4,
     minHeight: 500,
-    padding: "auto"
+    padding: "20px",
+    display: "flex"
   },
   mainFeaturedPostContent: {
-    padding: `${theme.spacing.unit * 6}px`
+    textAlign: "center",
+    margin: "0 auto",
+    maxWidth: 500,
+    padding: `${theme.spacing.unit * 2}px`,
+    [theme.breakpoints.up('md')]: {
+      padding: `${theme.spacing.unit * 6}px`
+    },
+    background: "#fcfcfc",
+    boxShadow: "0 8px 24px 0 rgba(0, 0, 0, 0.35)",
+    borderRadius: 8
   },
   mainGrid: {
     marginTop: theme.spacing.unit * 3
   },
   card: {
-    display: "flex"
+    display: "flex",
+    background: "#fcfcfc",
+    boxShadow: "0 8px 24px 0 rgba(0, 0, 0, 0.35)"
   },
   cardDetails: {
     flex: 1
@@ -181,7 +194,7 @@ class PlayerPage extends React.Component {
       } else {
         return (
           <>
-            <Grid item md={6}>
+            <Grid container direction="row" jusitfy="center" alignItems="center" item md={6}>
               <div className={classes.mainFeaturedPostContent}>
                 <Typography
                   component="h1"
@@ -202,13 +215,13 @@ class PlayerPage extends React.Component {
                 </Typography>
               </div>
             </Grid>
-            <Grid item md={6}>
+            <Grid container direction="row" jusitfy="center" alignItems="center" item md={6}>
               <div className={classes.mainFeaturedPostContent}>
-                <Typography component="h2" variant="h3" color="inherit">
-                  NBACP Prediction:{" "}
-                  {currPlayer.predictions
-                    ? `${currPlayer.predictions} year NBA career`
-                    : "Insufficient Data"}
+                <Typography component="h2" variant="h3" color="inherit" gutterBottom>
+                  Prediction
+                </Typography>
+                <Typography component="h4" variant="h5" color="inherit">
+                  {currPlayer && currPlayer.predictions} year NBA career
                 </Typography>
               </div>
             </Grid>

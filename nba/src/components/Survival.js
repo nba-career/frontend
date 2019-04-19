@@ -54,8 +54,7 @@ const styles = theme => ({
     background: "lightgray",
     color: theme.palette.common.white,
     marginBottom: theme.spacing.unit * 4,
-    minHeight: "500px",
-    padding: "auto"
+    minHeight: "500px"
   },
   mainFeaturedPostContent: {
     padding: theme.spacing.unit * 6
@@ -69,12 +68,27 @@ const styles = theme => ({
   cardDetails: {
     flex: 1
   },
+
+  userInput: {
+    background: `${theme.palette.grey[400]}`
+  },
+
+  checkboxColumn: {
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "center"
+  },
+
   checkbox: {
     color: "white"
   },
   graph: {
-    width: 731,
-    height: 579
+    width: "60vw",
+    height: "50vw",
+    [theme.breakpoints.up('lg')]: {
+      width: "54vw",
+      height: "43vw"
+    }
   },
   footer: {
     backgroundColor: theme.palette.background.paper,
@@ -232,7 +246,7 @@ class Survival extends React.Component {
                 </Typography>
               </div>
             </Grid> */}
-            <Grid item md={6}>
+            <Grid item>
               <div className={classes.mainFeaturedPostContent}>
                 <CardMedia className={classes.graph} image={graph} />
               </div>
@@ -272,11 +286,14 @@ class Survival extends React.Component {
           <main>
             {/* Main featured post */}
             <Paper className={classes.mainFeaturedPost}>
-              <Grid container direction="row" alignItems="center">
+              <Grid container 
+              direction="row"
+              justify="center"
+              alignItems="center">
                 <Grid item className={classes.userInput}>
                   {/* Should I use a FormControl here? Maybe! */}
                   <form className={classes.checkbox} onSubmit={this.submitData}>
-                    <div>
+                    <div className={classes.checkboxColumn}>
                       {decades.map((decade, index) => (
                         <FormControlLabel
                           key={index}
@@ -320,7 +337,7 @@ class Survival extends React.Component {
             {/* Sub featured posts */}
             <Grid container spacing={40} className={classes.cardGrid}>
               {featuredPosts.map(post => (
-                <Grid item key={post.title} xs={12} md={6}>
+                <Grid container display="flex" item key={post.title} xs={12} md={6}>>
                   <Card className={classes.card}>
                     <div className={classes.cardDetails}>
                       <CardContent>
