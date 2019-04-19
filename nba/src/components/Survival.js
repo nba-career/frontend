@@ -59,7 +59,10 @@ const styles = theme => ({
     minHeight: "500px"
   },
   mainFeaturedPostContent: {
-    padding: theme.spacing.unit * 6
+    padding: theme.spacing.unit * 6,
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center"
   },
   mainGrid: {
     marginTop: theme.spacing.unit * 3
@@ -86,7 +89,7 @@ const styles = theme => ({
     color: "white"
   },
   graph: {
-    width: "60vw",
+    width: "64vw",
     height: "50vw",
     [theme.breakpoints.up("lg")]: {
       width: "54vw",
@@ -121,7 +124,8 @@ class Survival extends React.Component {
     positions: [],
     era: [],
     search: "",
-    graph: null
+    graph: null,
+    title: null
   };
 
   componentDidMount() {
@@ -193,32 +197,34 @@ class Survival extends React.Component {
 
   submitData = e => {
     e.preventDefault();
-    // const proxyurl = "https://cors-anywhere.herokuapp.com/";
-    // const data = { era: this.state.era, positions: this.state.positions };
-    // console.log(data);
-    // axios
-    //   .get(proxyurl + "https://nbacareers.herokuapp.com/survival", data)
-    //   .then(res => {
-    //     console.log(res);
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    // });
+
+    let options = {
+      era: this.state.era,
+      positions: this.state.positions
+    };
+
+    console.log(options);
+
+    const proxyurl = "https://cors-anywhere.herokuapp.com/";
+
     axios
-      .get(
-        "https://nbacareers.herokuapp.com/file/['C', 'G'][1950, 2010]career.png"
-      )
+      .post(proxyurl + `https://nbacareers.herokuapp.com/survival`, options)
       .then(res => {
         console.log(res);
+
         this.setState({
-          ...this.state,
-          graph: res.data
+          graph: `https://nbacareers.herokuapp.com/file/${res.data}`
         });
+        console.log(this.state.graph);
       })
-      .catch(err => {
-        console.log(err);
-      });
-    console.log(this.state.graph);
+      .catch(err => console.log(err));
+
+    this.setState({
+      ...this.state,
+      title: `Kaplan-Meier Estimate for NBA ${this.state.positions.join(
+        ", "
+      )} on Roster at Start of First Season in ${this.state.era.join(", ")}`
+    });
   };
 
   submitSearch = e => {
@@ -240,8 +246,9 @@ class Survival extends React.Component {
     const positions = ["G", "F", "C", "F-C", "G-F", "C-F", "F-G"];
     const decades = ["1950", "1960", "1970", "1980", "1990", "2000", "2010"];
 
-    if (this.state.graph) {
-    }
+    const title = `Kaplan-Meier Estimate for NBA ${this.state.positions.join(
+      ", "
+    )} on Roster at Start of First Season in ${this.state.era.join(", ")}`;
 
     const GraphContent = () => {
       if (false) {
@@ -270,7 +277,13 @@ class Survival extends React.Component {
             </Grid> */}
             <Grid item>
               <div className={classes.mainFeaturedPostContent}>
-                <CardMedia className={classes.graph} image={graph} />
+                <h2 style={{ color: "black" }}>
+                  {this.state.graph && this.state.title}
+                </h2>
+                <CardMedia
+                  className={classes.graph}
+                  image={this.state.graph ? this.state.graph : graph}
+                />
               </div>
             </Grid>
           </>
