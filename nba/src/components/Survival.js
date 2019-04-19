@@ -18,6 +18,7 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Hidden from "@material-ui/core/Hidden";
 import Button from "@material-ui/core/Button";
+import Divider from "@material-ui/core/Divider";
 
 import Input from "@material-ui/core/Input";
 
@@ -28,6 +29,7 @@ import Checkbox from "@material-ui/core/Checkbox";
 import Loader from "react-loader-spinner";
 
 import graph from "../assets/survival-graph.png";
+
 const styles = theme => ({
   layout: {
     width: "auto",
@@ -70,7 +72,8 @@ const styles = theme => ({
   },
 
   userInput: {
-    background: `${theme.palette.grey[400]}`
+    background: `${theme.palette.grey[400]}`,
+    width: "80%"
   },
 
   checkboxColumn: {
@@ -85,7 +88,7 @@ const styles = theme => ({
   graph: {
     width: "60vw",
     height: "50vw",
-    [theme.breakpoints.up('lg')]: {
+    [theme.breakpoints.up("lg")]: {
       width: "54vw",
       height: "43vw"
     }
@@ -112,29 +115,13 @@ const featuredPosts = [
   }
 ];
 
-const archives = [
-  "March 2020",
-  "February 2020",
-  "January 2020",
-  "December 2019",
-  "November 2019",
-  "October 2019",
-  "September 2019",
-  "August 2019",
-  "July 2019",
-  "June 2019",
-  "May 2019",
-  "April 2019"
-];
-
-const social = ["GitHub", "Twitter", "Facebook"];
-
 class Survival extends React.Component {
   state = {
     open: true,
-    position: [],
+    positions: [],
     era: [],
-    search: ""
+    search: "",
+    graph: null
   };
 
   componentDidMount() {
@@ -163,11 +150,15 @@ class Survival extends React.Component {
     console.log(e.target.checked);
     if (e.target.checked) {
       this.setState({
-        era: [...this.state.era, e.target.value]
+        ...this.state,
+        era: [...this.state.era, Number(e.target.value)]
       });
     } else {
-      const eras = this.state.era.filter(era => era !== e.target.value);
+      const eras = this.state.era.filter(
+        era => Number(era) !== Number(e.target.value)
+      );
       this.setState({
+        ...this.state,
         era: eras
       });
     }
@@ -178,14 +169,16 @@ class Survival extends React.Component {
     console.log(e.target.checked);
     if (e.target.checked) {
       this.setState({
-        position: [...this.state.position, e.target.value]
+        ...this.state,
+        positions: [...this.state.positions, e.target.value]
       });
     } else {
-      const positions = this.state.position.filter(
+      const positions = this.state.positions.filter(
         position => position !== e.target.value
       );
       this.setState({
-        position: positions
+        ...this.state,
+        positions: positions
       });
     }
     console.log(this.state);
@@ -200,6 +193,32 @@ class Survival extends React.Component {
 
   submitData = e => {
     e.preventDefault();
+    // const proxyurl = "https://cors-anywhere.herokuapp.com/";
+    // const data = { era: this.state.era, positions: this.state.positions };
+    // console.log(data);
+    // axios
+    //   .get(proxyurl + "https://nbacareers.herokuapp.com/survival", data)
+    //   .then(res => {
+    //     console.log(res);
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    // });
+    axios
+      .get(
+        "https://nbacareers.herokuapp.com/file/['C', 'G'][1950, 2010]career.png"
+      )
+      .then(res => {
+        console.log(res);
+        this.setState({
+          ...this.state,
+          graph: res.data
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+    console.log(this.state.graph);
   };
 
   submitSearch = e => {
@@ -220,6 +239,9 @@ class Survival extends React.Component {
 
     const positions = ["G", "F", "C", "F-C", "G-F", "C-F", "F-G"];
     const decades = ["1950", "1960", "1970", "1980", "1990", "2000", "2010"];
+
+    if (this.state.graph) {
+    }
 
     const GraphContent = () => {
       if (false) {
@@ -286,10 +308,12 @@ class Survival extends React.Component {
           <main>
             {/* Main featured post */}
             <Paper className={classes.mainFeaturedPost}>
-              <Grid container 
-              direction="row"
-              justify="center"
-              alignItems="center">
+              <Grid
+                container
+                direction="row"
+                justify="center"
+                alignItems="center"
+              >
                 <Grid item className={classes.userInput}>
                   {/* Should I use a FormControl here? Maybe! */}
                   <form className={classes.checkbox} onSubmit={this.submitData}>
@@ -309,6 +333,7 @@ class Survival extends React.Component {
                         />
                       ))}
                     </div>
+                    <Divider />
                     <div>
                       {positions.map((position, index) => (
                         <FormControlLabel
@@ -325,7 +350,7 @@ class Survival extends React.Component {
                         />
                       ))}
                     </div>
-                    <Button className={classes.checkbox} size="small">
+                    <Button onClick={this.submitData} size="small">
                       Submit
                     </Button>
                   </form>
@@ -337,7 +362,15 @@ class Survival extends React.Component {
             {/* Sub featured posts */}
             <Grid container spacing={40} className={classes.cardGrid}>
               {featuredPosts.map(post => (
-                <Grid container display="flex" item key={post.title} xs={12} md={6}>>
+                <Grid
+                  container
+                  display="flex"
+                  item
+                  key={post.title}
+                  xs={12}
+                  md={6}
+                >
+                  >
                   <Card className={classes.card}>
                     <div className={classes.cardDetails}>
                       <CardContent>
