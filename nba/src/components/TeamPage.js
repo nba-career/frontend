@@ -255,7 +255,6 @@ class PlayerPageTwo extends React.Component {
     if (foundPlayer) {
       this.props.history.push(`/player/${foundPlayer.id}`);
     }
-    e.target.reset();
   };
 
   updateTeam = e => {
@@ -362,7 +361,7 @@ class PlayerPageTwo extends React.Component {
             </Typography>
             <form onSubmit={this.submitSearch}>
               <Input onChange={this.handleChanges} name="search" />
-              <IconButton>
+              <IconButton onClick={this.submitSearch}>
                 <SearchIcon />
               </IconButton>
             </form>

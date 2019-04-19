@@ -169,7 +169,6 @@ class PlayerPage extends React.Component {
     if (foundPlayer) {
       this.props.history.push(`/player/${foundPlayer.id}`);
     }
-    e.target.reset();
   };
 
   logout = e => {
@@ -269,7 +268,7 @@ class PlayerPage extends React.Component {
             </Typography>
             <form onSubmit={this.submitSearch}>
               <Input onChange={this.handleChanges} name="search" />
-              <IconButton>
+              <IconButton onClick={this.submitSearch}>
                 <SearchIcon />
               </IconButton>
             </form>
