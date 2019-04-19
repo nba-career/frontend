@@ -243,6 +243,11 @@ class Survival extends React.Component {
     e.target.reset();
   };
 
+  logout = e => {
+    localStorage.removeItem("token");
+    this.props.history.push("login");
+  };
+
   render() {
     const { classes } = this.props;
 
@@ -311,7 +316,7 @@ class Survival extends React.Component {
                 <SearchIcon />
               </IconButton>
             </form>
-            <Button variant="outlined" size="small">
+            <Button onClick={this.logout} variant="outlined" size="small">
               Log Out
             </Button>
           </Toolbar>
