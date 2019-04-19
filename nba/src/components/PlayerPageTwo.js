@@ -190,7 +190,7 @@ class PlayerPageTwo extends React.Component {
                   <br />
                   {currPlayer &&
                     currPlayer.draftYear &&
-                    `${currPlayer.draftYear} Draft, Pick ${currPlayer.pick}`}
+                    `${currPlayer.draftYear} Draft, Pick #${currPlayer.pick}`}
                 </Typography>
               </div>
             </Grid>
