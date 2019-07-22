@@ -97,18 +97,7 @@ class PlayerPageTwo extends React.Component {
     this.props.fetchData().then(res => {
       if (!this.state.player) {
         console.log(this.props.playerCount);
-        const randomID = Math.floor(
-          Math.random() * Math.floor(this.props.playerCount)
-        );
-        axios
-          .get(`https://nbacareers.herokuapp.com/api/players/${randomID}`)
-          .then(res => {
-            console.log(res);
-            this.setState({
-              player: res.data
-            });
-          })
-          .catch(err => console.log(err));
+        this.randomizePlayer();
       }
     });
   }
@@ -128,9 +117,13 @@ class PlayerPageTwo extends React.Component {
       .get(`https://nbacareers.herokuapp.com/api/players/${randomID}`)
       .then(res => {
         console.log(res);
-        this.setState({
-          player: res.data
-        });
+        if (res.data.predictions === 0) {
+          this.randomizePlayer();
+        } else {
+          this.setState({
+            player: res.data
+          });
+        }
       })
       .catch(err => console.log(err));
   };

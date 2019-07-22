@@ -83,36 +83,6 @@ const styles = theme => ({
   }
 });
 
-const featuredPosts = [
-  {
-    title: "Featured post",
-    date: "Nov 12",
-    description:
-      "This is a wider card with supporting text below as a natural lead-in to additional content."
-  },
-  {
-    title: "Post title",
-    date: "Nov 11",
-    description:
-      "This is a wider card with supporting text below as a natural lead-in to additional content."
-  }
-];
-
-const archives = [
-  "March 2020",
-  "February 2020",
-  "January 2020",
-  "December 2019",
-  "November 2019",
-  "October 2019",
-  "September 2019",
-  "August 2019",
-  "July 2019",
-  "June 2019",
-  "May 2019",
-  "April 2019"
-];
-
 class PlayerPage extends React.Component {
   state = {
     open: true,
@@ -153,9 +123,13 @@ class PlayerPage extends React.Component {
       .get(`https://nbacareers.herokuapp.com/api/players/${randomID}`)
       .then(res => {
         console.log(res);
-        this.setState({
-          player: res.data
-        });
+        if (res.data.predictions === 0) {
+          this.randomizePlayer();
+        } else {
+          this.setState({
+            player: res.data
+          });
+        }
       })
       .catch(err => console.log(err));
   };
@@ -197,7 +171,7 @@ class PlayerPage extends React.Component {
             <Grid
               container
               direction="row"
-              jusitfy="center"
+              justify="center"
               alignItems="center"
               item
               md={6}
