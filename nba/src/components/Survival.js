@@ -315,9 +315,9 @@ class Survival extends React.Component {
                 <SearchIcon />
               </IconButton>
             </form>
-            <Button onClick={this.logout} variant="outlined" size="small">
+            {/* <Button onClick={this.logout} variant="outlined" size="small">
               Log Out
-            </Button>
+            </Button> */}
           </Toolbar>
 
           <main>
