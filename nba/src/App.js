@@ -19,8 +19,8 @@ class App extends Component {
       <Router>
         <div className="App">
           <nav>
-            <Link to="/register">New User?</Link>
-            <Link to="/login">Login</Link>
+            {/* <Link to="/register">New User?</Link> */}
+            {/* <Link to="/login">Login</Link> */}
 
             <Link to="/player">Random Player</Link>
 
@@ -28,13 +28,13 @@ class App extends Component {
             <Link to="/team/1">Team Page</Link>
           </nav>
           <Route exact path="/" component={Home} />
-          <Route path="/register" component={Register} />
-          <Route path="/login" component={Login} />
+          {/* <Route path="/register" component={Register} /> */}
+          {/* <Route path="/login" component={Login} /> */}
 
-          <PrivateRoute path="/player/:id" component={PlayerPage} />
-          <PrivateRoute exact path="/player" component={PlayerPageTwo} />
-          <PrivateRoute path="/team/:id" component={TeamPage} />
-          <PrivateRoute path="/survival" component={Survival} />
+          <Route path="/player/:id" component={PlayerPage} />
+          <Route exact path="/player" component={PlayerPageTwo} />
+          <Route path="/team/:id" component={TeamPage} />
+          <Route path="/survival" component={Survival} />
         </div>
       </Router>
     );
