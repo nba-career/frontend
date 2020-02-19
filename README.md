@@ -6,11 +6,7 @@
 
 **MVP**
 
-1. Search for a player, and we tell you how long he'll be around.
-
-**Stretch**
-
-- tbd
+1. Search for a player, and we tell you how long he'll be plying his trade in the NBA.
 
 ---
 
